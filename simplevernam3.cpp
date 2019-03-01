@@ -1,13 +1,20 @@
 #include <iostream>
-
 using namespace std;
 
 string encryptDecrypt(string toEncrypt) {
+	int x=0;
+
     char key[] = {'d','r','u','m','m','o','n','d'};
     string output = toEncrypt;
-    
-    for (int i = 0; i < toEncrypt.size(); i++)
-        output[i] = toEncrypt[i] ^ key[i % (sizeof(key) / sizeof(char))];
+    int tam = 7;
+    for (int i = 0; i < toEncrypt.size(); i++){
+    	int aux1 = key[x];
+        output[i] = toEncrypt[i] ^ aux1;//key[i % (sizeof(key) / sizeof(char))];
+	    if (x < tam)
+			x++;
+		else
+			x = 0;
+	}
     
     return output;
 }
