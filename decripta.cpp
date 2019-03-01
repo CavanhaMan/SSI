@@ -30,7 +30,6 @@ int main(void)	{
 	char c1 = mensagemCifrada[0][0];
 	char c2 = mensagemCifrada[0][1];
 	
-	
 	for(int i=0 ; i<tamci ; i++) {
 		char aux = hexToAscii(mensagemCifrada[i][0],mensagemCifrada[i][1]);
 		mensagemResgatada[i]=aux^testeChave[i%6];
