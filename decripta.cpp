@@ -34,6 +34,7 @@ int main(void)	{
 	for(int i=0 ; i<tamci ; i++) {
 		char aux = hexToAscii(mensagemCifrada[i][0],mensagemCifrada[i][1]);
 		mensagemResgatada[i]=aux^testeChave[i%6];
+		
 		if((mensagemResgatada[i]>64 && mensagemResgatada[i]<91) || (mensagemResgatada[i]>96 && mensagemResgatada[i]<123))
 			cout << mensagemResgatada[i];
 		//printf("%c",mensagemResgatada[i]);
@@ -44,11 +45,11 @@ int main(void)	{
 			printf("%02X",mensagemResgatada[i]);*/
 	}
 
-	
-	
+	printf("\n");
+
 	//Converte texto de hexadecimal
 	for (int i=0 ; i<tamhe ; i++)
-		printf("%c", hexToAscii(mensagemHexa[i][0],mensagemHexa[i][1]));
+		cout << hexToAscii(mensagemHexa[i][0],mensagemHexa[i][1]);
 }
 
 
