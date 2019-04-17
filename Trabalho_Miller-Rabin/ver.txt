@@ -10,3 +10,19 @@ https://github.com/mertkosan/miller-rabin
 
 https://github.com/raywenderlich/swift-algorithm-club/tree/master/Miller-Rabin%20Primality%20Test
 
+
+____________________________________________
+diffie-Hellman
+
+https://github.com/topics/diffie-hellman-algorithm
+
+https://github.com/ngrj93/Diffie-Hellman-Key-Exchange
+
+https://github.com/TroyFernandes/Diffie-Hellman-Key-Exchange
+
+https://gist.github.com/cloudwu/8838724
+
+https://github.com/crypto-browserify/diffie-hellman
+
+https://github.com/topics/diffie-hellman
+
