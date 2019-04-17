@@ -63,6 +63,6 @@ int main() {
     if (Miller(num, iteration))
         cout<<num<<" eh primo!"<<endl;
     else
-        cout<<num<<" eh composite!"<<endl;
+        cout<<num<<" nao eh primo!"<<endl;
     return 0;
 }
