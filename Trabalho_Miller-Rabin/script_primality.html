@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0044)http://icosahedral.net/script/primality.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <link rel="stylesheet" type="text/css" href="./script_primality_files/mainstyle.css">
+ <link rel="icon" type="image/x-icon" href="http://icosahedral.net/favicon.ico">
+ <link rel="shortcut icon" type="image/x-icon" href="http://icosahedral.net/favicon.ico">
+ 
+ <script type="text/javascript" src="./script_primality_files/BigInt.js.download"></script>
+ <script type="text/javascript">
+    // <![CDATA[
+
+        function getRandInt(min, max) {
+          return Math.floor(Math.random() * (max - min)) + min;
+        }
+
+        //Performs a 50-round Rabin primality test on x
+        //Returns true if (probably) prime, false otherwise.
+        function isPrime(x){
+            if(negative(x) || isZero(x))
+				{return false;}
+ 
+            if(equals(x,int2bigInt(1,10,10)))
+				{return false;}
+
+            if(equals(x,int2bigInt(2,10,10)))
+				{return true;}
+
+            if(modInt(x,2) == 0)
+				{return false;}
+
+            //alert(millerRabin(x,13));
+
+            for(var i = 0; i<50; i++){
+                var max = greater(x,int2bigInt(1000000000,40,0)) ? 
+                         1000000000 : 
+                         parseInt(bigInt2str(x,10));
+
+                var rand = getRandInt(1,max);
+
+                if(modInt(x,rand) == 0 || modInt(x,rand) == 1)
+					{continue;}
+
+                if(!millerRabin(x,rand))
+					{return false;}
+            }
+            return true;
+        }
+
+        
+        function testPrime()        {
+            var str = document.getElementById("numfield").value;
+            var resultDiv = document.getElementById("primalityresult");
+
+            //Indicate that calculation is in progress...
+            resultDiv.innerHTML = "Calculating...";
+            resultDiv.style.color = "black";
+
+            //Ugly hack - wait 0 seconds to allow this thread to end so that 
+            //changes to innerHTML will be discovered by the browser.
+            //There are more correct ways to do this through DOM methods.
+            setTimeout('testPrimeHelper("' + str + '")', 0);
+        }
+
+        //Actually perform the test and update of the display
+        function testPrimeHelper(str)        {
+           var resultDiv = document.getElementById("primalityresult");
+
+           //Ensure the input is a valid number
+           var validChars = "0123456789";
+           for (var i = 0; i < str.length; i++) { 
+               c = str.charAt(i); 
+               if(validChars.indexOf(c) == -1) {
+                   resultDiv.innerHTML = "INVALID NUMBER";
+                   resultDiv.style.color = "red";
+                   return false;
+               }
+           }
+           
+           //Perform test
+           var x = str2bigInt(str,10,str.length * 4, 0);
+           if(isPrime(x)){
+               resultDiv.innerHTML = "PRIME";
+               resultDiv.style.color = "green";
+           }
+           else{
+               resultDiv.innerHTML = "NOT PRIME";
+               resultDiv.style.color = "red";
+           }
+        }
+
+    // ]]>
+    </script>  
+
+ <title>Icosahedral.net</title>
+
+</head>
+
+<body onload="testPrime();"> 
+
+  <h2> Javascript Primality Tester </h2>
+  <form action="http://icosahedral.net/script/primality.html" onsubmit="return false;">
+	Test a number here: <br>
+	<input id="numfield" name="numfield" type="text" value="7" onkeyup="testPrime();">
+  </form>
+  <div id="primalityresult" style="color: green;">PRIME</div>
+  <hr><BR><BR><BR>
+
+  <h4> Algorithm </h4>
+  The above prime checker performs 50 rounds of a Miller-Rabin primality test, a fast probabilistic
+  prime checking algorithm. The algorithm is guaranteed not to produce false negatives - if a number
+  is declared composite, then it is definitely composite. However, with astronomically small probability,
+  a false positive may occur - it is possible (but extraordinarily unlikely) that a number declared prime 
+  is actually composite.
+ </div>
+
+<div id="bottompanel">
+<div class="shadepanelleft"><div class="shadepanelright">
+Copyright © 2008, David Wu
+</div></div>
+</div>
+
+
+
+
+
+</body></html>
